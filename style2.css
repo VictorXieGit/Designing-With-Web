@@ -1,0 +1,464 @@
+/* 
+    ================================================================
+    style2.css — Victor's Little Spectacle
+    ================================================================
+    All the content made was verified by claude code, I gave him the access to my figma file.
+
+*/
+/*
+    === COLOR PALETTE (extracted from Figma's "Palette" group) ===
+    I used CSS variables to centralise all colours.
+
+    Prompt used: "What are CSS custom properties / variables and how do I declare them?"
+    → MDN docs explained the :root selector and var() syntax.
+*/
+
+:root {
+    --red:       #EE1B19; /* Main brand color – header background, prices */
+    --dark:      #2B303A; /* Dark grey – nav buttons */
+    --beige:     #EEE5E9; /* Beige/pink – filters sidebar background */
+    --white:     #FFFFFF;
+    --text-dark: #252525; /* Card title color from Figma (rgb 37,37,37) */
+    --text-grey: #B3B3B3; /* Placeholder color for search input (rgb 179,179,179) */
+}
+
+
+/* ================================================================
+   BASE / RESET
+   I removed default margins, paddings, and bullet points
+   because browsers apply their own styles that conflict with the design.
+================================================================ */
+
+* {
+    box-sizing: border-box; /* padding included in element width/height */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", sans-serif; /* Inter imported from Google Fonts */
+    font-size: 16px;
+    background-color: var(--white);
+    color: var(--text-dark);
+}
+
+ul {
+    list-style: none; /* remove bullet points from <ul> */
+}
+
+
+/* ================================================================
+   HEADER
+   I used display:flex to align all header items in a row.
+   align-items:center keeps them vertically centred (cross axis).
+   gap:60px matches the Figma gap value.
+================================================================ */
+
+.header {
+    display: flex;           /* flexbox: row by default */
+    flex-direction: row;
+    align-items: center;     /* vertical centering */
+    justify-content: space-between; /* spread logo, title, nav, search */
+    gap: 40px;
+    padding: 10px 40px;
+    background-color: var(--red);
+    width: 100%;
+    min-height: 176px;
+    flex-wrap: wrap;         /* I had a problem concerning that my header was too long so element where going outside,
+    I then prompted : there is not enough space on my header as my button takes too much space, 
+    how to use flex wrap so it can be put on top of each other ? I have another element after which is a search bar
+    Which the AI replied to use flex-wrap. Something we didn't see in the course*/ 
+}
+
+.logo {
+    width: 116px; /*setting the logo size as same as in my figma */
+    height: 103px;
+    border-radius: 4px;
+    display : flex;
+    flex-shrink: 0;
+    flex-direction: row;              /* prevent it from shrinking */
+    align-items:center;
+}
+
+/* Site title: TEXT node "Victor's little spectacle", size 32, color white */
+.site-title {
+    font-size: clamp(16px, 2.2vw, 32px);
+    font-weight: 400;
+    color: var(--white);
+    white-space: nowrap;
+    flex-shrink: 0;
+    
+}
+
+
+/* ================================================================
+   NAVIGATION BUTTONS
+   In Figma: 4 × INSTANCE "Button" – each with:
+   - fill: rgb(44,44,44) = dark grey
+   - padding: 12px all sides
+   - gap: 8px between icon and text
+   - layout: HORIZONTAL, CENTER
+================================================================ */
+
+.nav {
+    display: flex;       /* row of buttons */
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;           /* space between the 4 buttons */
+}
+
+.nav-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;             /* gap between icon, text, icon (matches Figma gap:8) */
+    padding: 12px;        /* matches Figma padding:12 all sides */
+    background-color: #2C2C2C; /* rgb(44,44,44) from Figma */
+    color: #F5F5F5;       /* rgb(245,245,245) from Figma */
+    font-family: "Inter", sans-serif;
+    font-size: clamp(8px, 1.1vw, 16px);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Lucide icons inside nav buttons: make them the right size and colour */
+.nav-btn i {
+    width: clamp(8px, 1.1vw, 16px);
+    height: 16px;
+    color: var(--white); /* icon color */
+}
+
+
+/* ================================================================
+   SEARCH BAR
+   I didn't know how to put the search bar well so I asked claude to give me the following code:
+   Prompt : Please help me put a research bar according to the figma (image of my figma) with a search icon, we can put text in it too
+   The AI didn't make the bar and the icon aligned so I changed the .search-bar to flex display and put align in center
+================================================================ */
+
+.search-bar {
+    position: relative;  /* needed so the icon can be positioned inside */
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search-bar input {
+    width: 20em;
+    height: 40px;
+    padding: 12px 40px 12px 16px; /* right padding leaves room for the icon */
+    background-color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    color: var(--text-dark);
+    outline: none;
+    
+}
+
+.search-bar input::placeholder {
+    color: var(--text-grey); /* matches rgb(179,179,179) from Figma */
+}
+
+.search-bar i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%); /* vertically center the icon */
+    width: 16px;
+    height: 16px;
+    color: var(--text-grey);
+    pointer-events: none; /* so clicking the icon clicks the input beneath */
+}
+
+
+/* ================================================================
+   CORE PAGE
+   
+   In Figma: FRAME "Core page" – layout VERTICAL, padding:10, gap:10
+   Contains: Promotion section + All Spectacle section.
+================================================================ */
+
+.core-page {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+
+/* ================================================================
+   PROMOTION SECTION
+   
+   In Figma: FRAME "Promotion" – layout GRID (effectively two columns)
+   Left: text block | Right: image placeholder
+   I replicated this with flexbox row + space-between.
+================================================================ */
+
+.promotion {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    min-height: 336px;
+    background-color: var(--beige); /* light background for the promo banner */
+    border-radius: 4px;
+}
+
+.promotion-text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 50%;
+}
+
+.promo-label {
+    font-size: 14px;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.promo-title {
+    font-size: 32px; /* matches Figma TEXT node size:32 */
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.promo-rating {
+    font-size: 18px;
+    color: var(--text-dark);
+}
+
+.promo-deal {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--red);
+}
+
+/* Image placeholder: matches RECTANGLE "image 1" (580x336px in Figma) */
+.promotion-image {
+    width: 580px;
+    height: 300px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* ================================================================
+   ALL SPECTACLE SECTION
+   I used flexbox row with a fixed-width aside for the sidebar.
+================================================================ */
+
+.all-spectacle {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 16px;
+    background-color: var(--white);
+}
+
+
+/* ================================================================
+   FILTERS SIDEBAR
+   
+   In Figma: FRAME "filters", fill var(--beige)
+   Contains 6 "menu" instances stacked vertically (gap:7).
+   Results of the prompt used to create the filters part of my figma (comment on the html side)
+================================================================ */
+
+.filters {
+    width: 311px;
+    flex-shrink: 0;           /* don't let it squish */
+    background-color: var(--beige);
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    align-self: flex-start;  /* don't stretch to full height */
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Each filter group (a collapsible row) */
+.filter-group {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Filter header: label on left, chevron icon on right
+   I used flexbox with justify-content:space-between, as shown in Figma.
+*/
+.filter-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* label left, icon right */
+    align-items: center;
+    padding: 0 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filter-header i {
+    width: 24px;
+    height: 24px;
+    color: var(--text-dark);
+}
+
+/* Expanded filter: radio option list */
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 8px 0 8px;
+}
+
+.filter-options li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+/* Style the radio buttons to look like the circles in Figma */
+.filter-options input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--red); /* color the radio when selected */
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+
+/* ================================================================
+   SHOW CARDS GRID
+   I used flexbox with flex-wrap so cards can wrap on smaller screens.
+================================================================ */
+
+.shows {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;   /* cards wrap if viewport is too narrow */
+    gap: 10px;
+    flex: 1;
+}
+
+
+/* ================================================================
+   CARD COMPONENT
+   Prompt used: "How do I make a card with an image on top and text below in CSS?"
+   → I used flexbox column on .card with flex children for image and body.
+================================================================ */
+
+.card {
+    width: 300px;
+    background-color: var(--white);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3); /* subtle shadow to lift the card, the AI suggested this part */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    position: relative;       /* needed for the heart button overlay */
+    display : flex;
+    justify-content: center;
+}
+
+/* Heart / favorite button: I prompted : I want you to give me the css and html code for creating a heart button in the bottom of my image
+however at first the AI put the heart in the top right corner so I had to change it myself 
+*/
+.card-favorite {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.card-favorite i {
+    width: 16px;
+    height: 16px;
+    color: var(--red);
+}
+
+/* Card body: the text section below the image, Wanted every text to match my figma so I prompted :
+According to the figma, give me the css code which will enable me to have all the different information in the right format */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* push price to the bottom */
+    gap: 8px;
+    padding: 16px;
+    flex: 1;
+}
+
+/* Card info: title + meta + dates + description */
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.card-meta {
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+.card-dates {
+    font-size: 16px;
+    color: #000;
+    margin-top: 4px;
+}
+
+.card-desc {
+    font-size: 12px;
+    color: #000;
+    line-height: 1.4;
+    margin-top: 4px;
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.card-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--red); /* matches rgb(238,27,25) from Figma */
+}
+
+.card-tickets {
+    font-size: 16px;
+    color: var(--red);
+}

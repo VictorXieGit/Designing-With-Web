@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor's Little Spectacle</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Link to our CSS file -->
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <!-- ===================== HEADER =====================
+         The header is a red bar containing:
+         - A logo (placeholder rectangle)
+         - The site title
+         - 4 navigation buttons (with Lucide icons)
+         - A search bar (with a search icon)
+
+         Layout: flexbox row, space-between (as shown in Figma).
+         I used display:flex + justify-content:space-between on .header
+         to push the logo/title to the left and the nav+search to the right.
+    -->
+
+    <!--
+    I forgot how to use lucide icon shown in class.
+    Prompt used for icons: "How do I use Lucide icons in a plain HTML file?"
+    → Lucide docs showed me to add a <script> tag from unpkg.com,
+    then use <i data-lucide="icon-name"></i>, and call lucide.createIcons().
+    -->
+    <header class="header">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo" width=116 height=auto> <!-- had to set myself the size of the img because it was way too big-->
+        </div>
+
+        <h1 class="site-title">Victor's little spectacle</h1>
+
+        <!-- Navigation buttons: 4 buttons instances.
+             I used display:flex on the nav to align them in a row with a gap as seen in class. -->
+        <nav class="nav">
+            <button class="nav-btn">
+                All spectacle
+            </button>
+            <button class="nav-btn">
+                All theater
+            </button>
+            <button class="nav-btn">
+                All actors
+            </button>
+            <button class="nav-btn">
+                Tickets
+            </button>
+        </nav>
+
+        <!-- Refer to the prompt use in css -->
+        <div class="search-bar">
+            <input type="text" placeholder="Start your research">
+            <i data-lucide="search"></i>
+        </div>
+
+    </header>
+    <!-- ==================== END HEADER ==================== -->
+
+
+    <!-- ===================== CORE PAGE =====================
+         The main content area below the header, containing:
+         1. A promotion banner (featured show + image)
+         2. The "All spectacle" section (filters sidebar + show cards)
+    -->
+    <main class="core-page">
+
+        <!-- --- PROMOTION SECTION ---
+             Left side: text block with recommendation, title, rating, and promo message.
+             Right side: a placeholder for the show's image.
+             Layout: flexbox row, space-between.
+             I couldn't put the 50% off image on my own image.
+        -->
+
+        <section class="promotion">
+            <div class="promotion-text">
+                <p class="promo-label">Our recommandation</p>
+                <h2 class="promo-title">The play that goes wrong</h2>
+                <p class="promo-rating">⭐ 9/10 (530 reviews)</p>
+                <p class="promo-deal">🎟️ Huge Promotion !!!</p>
+            </div>
+            <div class="promotion-image">
+                <img src ="images/theplay.webp" width=auto height=auto>
+            </div>
+        </section>
+        <!-- --- END PROMOTION --- -->
+
+
+        <!-- --- ALL SPECTACLE SECTION ---
+             Two-column layout:
+             - Left: filters sidebar
+             - Right: grid of show cards
+
+             Layout: flexbox row, with a fixed-width sidebar and a flexible card area.
+             I used display:flex + gap on .all-spectacle.
+        -->
+        <section class="all-spectacle">
+
+            <!-- FILTERS SIDEBAR
+                 I used <ul> + <li> for semantic filter lists. However I was not sure how to put my filters so I used Ai
+                Prompt : I want to make a filter section such as this (image of my figma), I already so ul and il for listing, can you give me 
+                the overall structure ?
+            -->
+
+            <aside class="filters">
+
+                <!-- Expanded filter: Sort By -->
+                <div class="filter-group filter-group--open">
+                    <div class="filter-header">
+                        <span>Sort by:</span>
+                        <!-- chevron-up = expanded state -->
+                        <i data-lucide="chevron-up"></i>
+                    </div>
+                    <ul class="filter-options">
+                        <li>
+                            <input type="radio" name="sort" id="low-high">
+                            <label for="low-high">Price Low to High</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="sort" id="high-low">
+                            <label for="high-low">Price High to Low</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="sort" id="available">
+                            <label for="available">Place available</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="sort" id="weekends">
+                            <label for="weekends">Weekends representation</label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Collapsed filters: each is a row with a label and a chevron icon -->
+                <!-- I used flexbox (space-between) to push the icon to the right, as in Figma -->
+                <div class="filter-group">
+                    <div class="filter-header">
+                        <span>Theater</span>
+                        <i data-lucide="chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-header">
+                        <span>Category</span>
+                        <i data-lucide="chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-header">
+                        <span>Location</span>
+                        <i data-lucide="chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-header">
+                        <span>Our recommandation</span>
+                        <i data-lucide="chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-header">
+                        <span>Price</span>
+                        <i data-lucide="chevron-down"></i>
+                    </div>
+                </div>
+
+            </aside>
+            <!-- END FILTERS -->
+
+
+            <!-- SHOW CARDS GRID
+                 3 cards side by side, each representing a spectacle.
+                 Each card has:
+                 - An image area
+                 - A heart icon
+                 - Show title, category, theater, dates, description
+                 - Price + tickets remaining
+
+                 Layout: flexbox row with wrap, gap between cards.
+                 I used display:flex + flex-wrap:wrap on .shows.
+            -->
+            <div class="shows">
+
+                <!-- CARD 1 -->
+                <article class="card">
+                    <div class="card-image">
+                        <img src = "images/the-play-that-goes-wrong.jpg" alt ="Error img 404">
+                        <!-- Heart/favorite icon overlay on the image -->
+                        <button class="card-favorite" aria-label="Add to favorites">
+                            <i data-lucide="heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-info">
+                            <h3 class="card-title">The Play That Goes Wrong</h3>
+                            <p class="card-meta">Category : Comedies</p>
+                            <p class="card-meta">Theater : Duchess Theatre</p>
+                            <p class="card-dates">From Fri Nov 26 2021 to Sun Jan 30 2022</p>
+                            <p class="card-desc">
+                                Putting Mischief Theatre firmly on the map, The Play That Goes Wrong
+                                continues to leave audiences in fits of giggles at the Duchess Theatre.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">$ 59.00</span>
+                            <span class="card-tickets">(144 tickets remaining)</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 2 -->
+                <article class="card">
+                    <div class="card-image">
+                        <img src ="images/wicked.jpg" alt = "error">
+                        <button class="card-favorite" aria-label="Add to favorites">
+                            <i data-lucide="heart"></i>
+                        </button>
+                    
+                    </div>
+                    <div class="card-body">
+                        <div class="card-info">
+                            <h3 class="card-title">Wicked</h3>
+                            <p class="card-meta">Category : Musicals</p>
+                            <p class="card-meta">Theater : Appolo Victoria Theatre</p>
+                            <p class="card-dates">From Mon Mar 14 2022 to Tue May 31 2022</p>
+                            <p class="card-desc">
+                                Since opening on Broadway in 2003, Wicked has taken the world of musical theatre by storm.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">$ 29.00</span>
+                            <span class="card-tickets">(249 tickets remaining)</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 3 -->
+                <article class="card">
+                    <div class="card-image">
+                        <img src = "images/pride-and-prejudice-sort-of.jpg" alt = "error">
+                        <button class="card-favorite" aria-label="Add to favorites">
+                            <i data-lucide="heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-info">
+                            <h3 class="card-title">Pride and Prejudice</h3>
+                            <p class="card-meta">Category : Comedies</p>
+                            <p class="card-meta">Theater : Criterion Theatre</p>
+                            <p class="card-dates">From Sun Nov 28 2021 to Mon Feb 14 2022</p>
+                            <p class="card-desc">
+                                It’s a truth universally acknowledged that a Jane Austen novel
+                                 must be dapted - and this time, 30 years of pop hits and an irreverent 
+                                 all-female cast bring a bold new Pride and Prejudice to the Criterion 
+                                 Theatre!
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">$ 59.00</span>
+                            <span class="card-tickets">(291 tickets remaining)</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+            <!-- END CARDS -->
+
+        </section>
+        <!-- END ALL SPECTACLE -->
+
+    </main>
+    <!-- ==================== END CORE PAGE ==================== -->
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>
