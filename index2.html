@@ -191,95 +191,17 @@
                  Layout: flexbox row with wrap, gap between cards.
                  I used display:flex + flex-wrap:wrap on .shows.
             -->
-            <div class="shows">
-
-                <!-- CARD 1 -->
-                <article class="card">
-                    <div class="card-image">
-                        <img src = "images/the-play-that-goes-wrong.jpg" alt ="Error img 404">
-                        <!-- Heart/favorite icon overlay on the image -->
-                        <button class="card-favorite" aria-label="Add to favorites">
-                            <i data-lucide="heart"></i>
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-info">
-                            <h3 class="card-title">The Play That Goes Wrong</h3>
-                            <p class="card-meta">Category : Comedies</p>
-                            <p class="card-meta">Theater : Duchess Theatre</p>
-                            <p class="card-dates">From Fri Nov 26 2021 to Sun Jan 30 2022</p>
-                            <p class="card-desc">
-                                Putting Mischief Theatre firmly on the map, The Play That Goes Wrong
-                                continues to leave audiences in fits of giggles at the Duchess Theatre.
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-price">$ 59.00</span>
-                            <span class="card-tickets">(144 tickets remaining)</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- CARD 2 -->
-                <article class="card">
-                    <div class="card-image">
-                        <img src ="images/wicked.jpg" alt = "error">
-                        <button class="card-favorite" aria-label="Add to favorites">
-                            <i data-lucide="heart"></i>
-                        </button>
-                    
-                    </div>
-                    <div class="card-body">
-                        <div class="card-info">
-                            <h3 class="card-title">Wicked</h3>
-                            <p class="card-meta">Category : Musicals</p>
-                            <p class="card-meta">Theater : Appolo Victoria Theatre</p>
-                            <p class="card-dates">From Mon Mar 14 2022 to Tue May 31 2022</p>
-                            <p class="card-desc">
-                                Since opening on Broadway in 2003, Wicked has taken the world of musical theatre by storm.
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-price">$ 29.00</span>
-                            <span class="card-tickets">(249 tickets remaining)</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- CARD 3 -->
-                <article class="card">
-                    <div class="card-image">
-                        <img src = "images/pride-and-prejudice-sort-of.jpg" alt = "error">
-                        <button class="card-favorite" aria-label="Add to favorites">
-                            <i data-lucide="heart"></i>
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-info">
-                            <h3 class="card-title">Pride and Prejudice</h3>
-                            <p class="card-meta">Category : Comedies</p>
-                            <p class="card-meta">Theater : Criterion Theatre</p>
-                            <p class="card-dates">From Sun Nov 28 2021 to Mon Feb 14 2022</p>
-                            <p class="card-desc">
-                                It’s a truth universally acknowledged that a Jane Austen novel
-                                 must be dapted - and this time, 30 years of pop hits and an irreverent 
-                                 all-female cast bring a bold new Pride and Prejudice to the Criterion 
-                                 Theatre!
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-price">$ 59.00</span>
-                            <span class="card-tickets">(291 tickets remaining)</span>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
+            <!-- When dealing with javascript, I replaced the structure into the javascript file
+             then I used variable to show each text, the diplsay stay the same with 3 card per row 
+             -->
+            <div class="shows" id="shows-container">
+                </div>
             <!-- END CARDS -->
-
-        </section>
-        <!-- END ALL SPECTACLE -->
-
-    </main>
+            </section>
+        <!-- End all spectacle (filter + cards)-->
+        </main>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="script2.js"></script>
     <!-- ==================== END CORE PAGE ==================== -->
 
     <script src="https://unpkg.com/lucide@latest"></script>
